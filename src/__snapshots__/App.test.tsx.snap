@@ -3,14 +3,14 @@
 exports[`<App /> renders component correctly 1`] = `
 <div>
   <div
-    class="App"
+    class="sc-bdvvtL bKhKNO"
   >
-    <header
-      class="App-header"
+    <div
+      class="sc-gsDKAQ ipDMAC"
     >
       <img
         alt="logo"
-        class="App-logo"
+        class="sc-dkPtRN gBvcKg"
         src="logo.svg"
       />
       <p>
@@ -21,14 +21,14 @@ exports[`<App /> renders component correctly 1`] = `
          and save to reload.
       </p>
       <a
-        class="App-link"
+        class="sc-hKwDye boCHbV"
         href="https://reactjs.org"
         rel="noopener noreferrer"
         target="_blank"
       >
         Learn React
       </a>
-    </header>
+    </div>
   </div>
 </div>
 `;

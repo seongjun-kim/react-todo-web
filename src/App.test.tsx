@@ -13,11 +13,9 @@ describe("<App />", () => {
     //   'Learn React'
     // );
 
-    expect(container.getElementsByClassName("App-logo")).toHaveLength(1);
-    expect(container.getElementsByClassName("App-logo")[0]).toHaveAttribute(
-      "src",
-      "logo.svg"
-    );
+    const appLogo = screen.getByAltText("logo");
+    expect(appLogo).toBeInTheDocument();
+    expect(appLogo).toHaveAttribute("src", "logo.svg");
 
     expect(container.getElementsByTagName("p")).toHaveLength(1);
     expect(container.getElementsByTagName("p")[0]).toHaveTextContent(
