@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Button, Input } from 'Components';
+import { Button, Input, ToDoItem } from 'Components';
 
 const Container = Styled.div`
   min-height: 100vh;
@@ -30,6 +30,7 @@ function App() {
   return (
     <Container>
       <Contents>
+        <ToDoItem label="todo" onDelete={() => alert('Delete!')} />
         <InputContainer>
           <Input placeholder="Enter what to do..." onChange={(text) => console.log(text)} />
           <Button
@@ -39,7 +40,6 @@ function App() {
             }}
           />
         </InputContainer>
-        {/* <Button label="Delete" backgroundColor="#ff1744" hoverColor="#f01440" /> */}
       </Contents>
     </Container>
   );
