@@ -1,6 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Button, Input, ToDoItem } from 'Components';
+import { Button, Input, ToDoList } from 'Components';
+import { useState } from 'react';
 
 const Container = Styled.div`
   min-height: 100vh;
@@ -21,22 +22,38 @@ const Contents = Styled.div`
 
 const InputContainer = Styled.div`
   display: flex;
-  align-self: center;
-  width: 105%;
-  justify-content: space-around;
 `;
 
 function App() {
+  const [toDo, setToDo] = useState('');
+  const [toDoList, setToDoList] = useState<string[]>([]);
+
+  const addToDo = (): void => {
+    if (toDo) {
+      setToDoList([...toDoList, toDo]);
+      setToDo('');
+    }
+  };
+  const deleteToDo = (index: number): void => {
+    let list = [...toDoList];
+    list.splice(index, 1);
+    setToDoList(list);
+  };
+
   return (
     <Container>
       <Contents>
-        <ToDoItem label="todo" onDelete={() => alert('Delete!')} />
+        <ToDoList data={toDoList} handleDelete={deleteToDo} />
         <InputContainer>
-          <Input placeholder="Enter what to do..." onChange={(text) => console.log(text)} />
+          <Input
+            value={toDo}
+            placeholder="Enter what to do..."
+            onChange={(text) => setToDo(text)}
+          />
           <Button
             label="Add"
             onClick={() => {
-              alert('Add!');
+              addToDo();
             }}
           />
         </InputContainer>
