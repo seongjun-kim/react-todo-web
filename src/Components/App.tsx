@@ -1,6 +1,6 @@
-import React from "react";
-import logo from "./logo.svg";
-import Styled, { keyframes } from "styled-components";
+import React from 'react';
+import logo from './logo.svg';
+import Styled, { keyframes } from 'styled-components';
 
 const spin = keyframes`
   from {
@@ -50,11 +50,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <AppLink
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <AppLink href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
           Learn React
         </AppLink>
       </Header>
