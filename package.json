@@ -2,6 +2,7 @@
   "name": "todo-web",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://seongjun-kim.github.io/todo-web",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -16,7 +17,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -d build"
   },
   "husky": {
     "hooks": {
@@ -52,6 +55,7 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/styled-components": "^5.1.19",
+    "gh-pages": "^3.2.3",
     "husky": "^7.0.4",
     "jest-styled-components": "^7.0.8",
     "lint-staged": "^12.1.4",
