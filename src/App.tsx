@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Button, Input, ToDoList } from 'Components';
+import { InputContainer, ToDoList } from 'Components';
 import { useState } from 'react';
 
 const Container = Styled.div`
@@ -18,10 +18,6 @@ const Contents = Styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
-`;
-
-const InputContainer = Styled.div`
-  display: flex;
 `;
 
 function App() {
@@ -44,19 +40,7 @@ function App() {
     <Container>
       <Contents>
         <ToDoList data={toDoList} handleDelete={deleteToDo} />
-        <InputContainer>
-          <Input
-            value={toDo}
-            placeholder="Enter what to do..."
-            onChange={(text) => setToDo(text)}
-          />
-          <Button
-            label="Add"
-            onClick={() => {
-              addToDo();
-            }}
-          />
-        </InputContainer>
+        <InputContainer data={toDo} handleChange={(text) => setToDo(text)} handleAdd={addToDo} />
       </Contents>
     </Container>
   );
