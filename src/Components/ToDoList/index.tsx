@@ -1,5 +1,7 @@
-import { ToDoItem } from 'Components';
+import React from 'react';
 import Styled from 'styled-components';
+
+import { ToDoItem } from 'Components/ToDoItem';
 
 const Container = Styled.div`
     min-width: 350px;
@@ -10,8 +12,8 @@ const Container = Styled.div`
 `;
 
 interface Props {
-  data: string[];
-  handleDelete: (index: number) => void;
+  readonly data: string[];
+  readonly handleDelete: (index: number) => void;
 }
 
 export const ToDoList = ({ data, handleDelete }: Props) => {
