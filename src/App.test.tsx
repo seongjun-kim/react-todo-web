@@ -61,4 +61,16 @@ describe('<App />', () => {
 
     expect(toDoList.childElementCount).toBe(length);
   });
+
+  it('loads localStorage data', () => {
+    const sampleData = ['ToDo 1', 'ToDo 2', 'ToDo 3'];
+    localStorage.setItem('ToDoList', JSON.stringify(sampleData));
+
+    render(<App />);
+
+    expect(screen.getByText(sampleData[0])).toBeInTheDocument();
+    expect(screen.getByText(sampleData[1])).toBeInTheDocument();
+    expect(screen.getByText(sampleData[2])).toBeInTheDocument();
+    expect(screen.getAllByText('Delete').length).toBe(3);
+  });
 });
