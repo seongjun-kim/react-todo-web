@@ -16,7 +16,7 @@ interface Props {
 
 export const ToDoList = ({ data, handleDelete }: Props) => {
   return (
-    <Container>
+    <Container data-testid="toDoList">
       {data.map((item, index) => (
         <ToDoItem key={item} label={item} onDelete={() => handleDelete(index)} />
       ))}

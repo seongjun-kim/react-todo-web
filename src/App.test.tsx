@@ -1,23 +1,64 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
+import 'jest-styled-components';
 
 describe('<App />', () => {
   it('renders component correctly', () => {
-    // const { container } = render(<App />);
-    // const linkElement = screen.getByText(/learn react/i);
-    // expect(linkElement).toBeInTheDocument();
-    // // expect(container.getElementsByTagName('a')).toHaveLength(1);
-    // // expect(container.getElementsByTagName('a')[0]).toHaveTextContent(
-    // //   'Learn React'
-    // // );
-    // const appLogo = screen.getByAltText('logo');
-    // expect(appLogo).toBeInTheDocument();
-    // expect(appLogo).toHaveAttribute('src', 'logo.svg');
-    // expect(container.getElementsByTagName('p')).toHaveLength(1);
-    // expect(container.getElementsByTagName('p')[0]).toHaveTextContent(
-    //   'Edit src/App.js and save to reload.',
-    // );
-    // expect(container).toMatchSnapshot();
+    const { container } = render(<App />);
+
+    const toDoList = screen.getByTestId('toDoList');
+    expect(toDoList).toBeInTheDocument();
+    expect(toDoList.firstChild).toBeNull();
+
+    const input = screen.getByPlaceholderText('Enter what to do...');
+    expect(input).toBeInTheDocument();
+    const label = screen.getByText('Add');
+    expect(label).toBeInTheDocument();
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('adds and deletes ToDo item', () => {
+    render(<App />);
+
+    // Add first ToDo item
+    const input = screen.getByPlaceholderText('Enter what to do...');
+    const addButton = screen.getByText('Add');
+    fireEvent.change(input, { target: { value: '1st TODO ITEM' } });
+    fireEvent.click(addButton);
+    const firstToDoItem = screen.getByText('1st TODO ITEM');
+    expect(firstToDoItem).toBeInTheDocument();
+    const toDoList = screen.getByTestId('toDoList');
+    expect(toDoList.childElementCount).toBe(1);
+
+    // Check delete button added in the first ToDO item
+    const deleteButton = screen.getByText('Delete');
+    expect(deleteButton).toBeInTheDocument();
+
+    // Add second ToDo item
+    fireEvent.change(input, { target: { value: '2nd TODO ITEM' } });
+    fireEvent.click(addButton);
+    const secondToDoItem = screen.getByText('2nd TODO ITEM');
+    expect(secondToDoItem).toBeInTheDocument();
+    expect(toDoList.childElementCount).toBe(2);
+
+    // Delete the first ToDo item
+    const deleteButtons = screen.getAllByText('Delete');
+    fireEvent.click(deleteButtons[0]);
+    expect(firstToDoItem).not.toBeInTheDocument();
+    expect(toDoList.childElementCount).toBe(1);
+  });
+
+  it('does not add empty ToDo', () => {
+    render(<App />);
+
+    const toDoList = screen.getByTestId('toDoList');
+    const length = toDoList.childElementCount;
+
+    const button = screen.getByText('Add');
+    fireEvent.click(button);
+
+    expect(toDoList.childElementCount).toBe(length);
   });
 });
