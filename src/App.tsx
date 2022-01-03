@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { InputContainer, ToDoList } from 'Components';
-import { useState } from 'react';
+import { ToDoListProvider } from 'Contexts';
 
 const Container = Styled.div`
   min-height: 100vh;
@@ -21,28 +21,15 @@ const Contents = Styled.div`
 `;
 
 function App() {
-  const [toDo, setToDo] = useState('');
-  const [toDoList, setToDoList] = useState<string[]>([]);
-
-  const addToDo = (): void => {
-    if (toDo) {
-      setToDoList([...toDoList, toDo]);
-      setToDo('');
-    }
-  };
-  const deleteToDo = (index: number): void => {
-    let list = [...toDoList];
-    list.splice(index, 1);
-    setToDoList(list);
-  };
-
   return (
-    <Container>
-      <Contents>
-        <ToDoList data={toDoList} handleDelete={deleteToDo} />
-        <InputContainer data={toDo} handleChange={(text) => setToDo(text)} handleAdd={addToDo} />
-      </Contents>
-    </Container>
+    <ToDoListProvider>
+      <Container>
+        <Contents>
+          <ToDoList />
+          <InputContainer />
+        </Contents>
+      </Container>
+    </ToDoListProvider>
   );
 }
 
