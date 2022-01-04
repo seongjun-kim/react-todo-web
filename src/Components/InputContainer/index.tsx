@@ -8,7 +8,11 @@ const Container = Styled.div`
     display:flex;
 `;
 
-export const InputContainer = () => {
+interface Props {
+  readonly onAdd?: () => void;
+}
+
+export const InputContainer = ({ onAdd }: Props) => {
   const [toDo, setToDo] = useState('');
   const { addToDo } = useContext(ToDoListContext);
 
@@ -20,6 +24,9 @@ export const InputContainer = () => {
         onClick={() => {
           addToDo(toDo);
           setToDo('');
+          if (toDo && typeof onAdd === 'function') {
+            onAdd();
+          }
         }}
       />
     </Container>
