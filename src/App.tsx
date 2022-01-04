@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { Routes, Route } from 'react-router-dom';
-import { List, Add, Detail } from 'Pages';
+import { useRoutes } from 'react-router-dom';
+import { List, Add, Detail, NotFound } from 'Pages';
 import { ToDoListProvider } from 'Contexts';
 import { PageHeader } from 'Components';
 
@@ -13,16 +13,20 @@ const Container = Styled.div`
   flex-direction: column;
 `;
 
+const Routes = () =>
+  useRoutes([
+    { path: '/', element: <List /> },
+    { path: '/add', element: <Add /> },
+    { path: '/detail/:id', element: <Detail /> },
+    { path: '*', element: <NotFound /> },
+  ]);
+
 function App() {
   return (
     <ToDoListProvider>
       <Container>
         <PageHeader />
-        <Routes>
-          <Route path={'/'} element={<List />} />
-          <Route path={'/add'} element={<Add />} />
-          <Route path={'/detail/:id'} element={<Detail />} />
-        </Routes>
+        <Routes />
       </Container>
     </ToDoListProvider>
   );
