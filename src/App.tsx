@@ -1,6 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { InputContainer, ToDoList } from 'Components';
+import { Routes, Route } from 'react-router-dom';
+import { List, Add } from 'Pages';
 import { ToDoListProvider } from 'Contexts';
 
 const Container = Styled.div`
@@ -11,23 +12,14 @@ const Container = Styled.div`
   flex-direction: column;
 `;
 
-const Contents = Styled.div`
-  display:flex;
-  background-color: #fff;
-  flex-direction: column;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
-`;
-
 function App() {
   return (
     <ToDoListProvider>
       <Container>
-        <Contents>
-          <ToDoList />
-          <InputContainer />
-        </Contents>
+        <Routes>
+          <Route path={'/'} element={<List />} />
+          <Route path={'/add'} element={<Add />} />
+        </Routes>
       </Container>
     </ToDoListProvider>
   );
