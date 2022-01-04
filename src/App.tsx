@@ -3,6 +3,7 @@ import Styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
 import { List, Add, Detail } from 'Pages';
 import { ToDoListProvider } from 'Contexts';
+import { PageHeader } from 'Components';
 
 const Container = Styled.div`
   min-height: 100vh;
@@ -16,6 +17,7 @@ function App() {
   return (
     <ToDoListProvider>
       <Container>
+        <PageHeader />
         <Routes>
           <Route path={'/'} element={<List />} />
           <Route path={'/add'} element={<Add />} />
