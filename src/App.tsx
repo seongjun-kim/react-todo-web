@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
-import { List, Add } from 'Pages';
+import { List, Add, Detail } from 'Pages';
 import { ToDoListProvider } from 'Contexts';
 
 const Container = Styled.div`
@@ -19,6 +19,7 @@ function App() {
         <Routes>
           <Route path={'/'} element={<List />} />
           <Route path={'/add'} element={<Add />} />
+          <Route path={'/detail/:id'} element={<Detail />} />
         </Routes>
       </Container>
     </ToDoListProvider>
