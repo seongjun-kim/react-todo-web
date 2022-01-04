@@ -48,4 +48,20 @@ describe('<InputContainer />', () => {
     // expect(localStorage.getItem('ToDoList')).toBe(`["${sampleInput}"]`); // 저장된 데이터 형태로 확인
     expect(JSON.parse(localStorage.getItem('ToDoList') as string).length).toBe(1); // 저장된 데이터 갯수로 확인
   });
+
+  it('calls the onAdd function when the user clicks add button', () => {
+    const handleClick = jest.fn();
+    render(<InputContainer onAdd={handleClick} />);
+
+    const input = screen.getByPlaceholderText('Enter what to do...');
+    const button = screen.getByText('Add');
+    expect(handleClick).toHaveBeenCalledTimes(0);
+
+    fireEvent.click(button);
+    expect(handleClick).toHaveBeenCalledTimes(0);
+
+    fireEvent.change(input, { target: { value: 'ToDo 1' } });
+    fireEvent.click(button);
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
 });
