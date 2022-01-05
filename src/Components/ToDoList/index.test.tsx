@@ -4,13 +4,16 @@ import 'jest-styled-components';
 
 import { ToDoListProvider } from 'Contexts';
 import { ToDoList } from './index';
+import { renderWithRouter } from 'Libs/utils';
+import { useLocation } from 'react-router-dom';
 
 describe('<ToDoList />', () => {
   it('renders component correctly', () => {
-    const { container } = render(
+    const { container } = renderWithRouter(
       <ToDoListProvider>
         <ToDoList />
       </ToDoListProvider>,
+      { route: '/' },
     );
 
     const toDoList = screen.getByTestId('toDoList');
@@ -24,15 +27,23 @@ describe('<ToDoList />', () => {
     const sampleData = ['ToDo 1', 'ToDo 2', 'ToDo 3'];
     localStorage.setItem('ToDoList', JSON.stringify(sampleData));
 
-    render(
+    renderWithRouter(
       <ToDoListProvider>
         <ToDoList />
       </ToDoListProvider>,
+      { route: '/' },
     );
 
-    expect(screen.getByText(sampleData[0])).toBeInTheDocument();
-    expect(screen.getByText(sampleData[1])).toBeInTheDocument();
-    expect(screen.getByText(sampleData[2])).toBeInTheDocument();
+    const toDoItem0 = screen.getByText(sampleData[0]);
+    expect(toDoItem0).toBeInTheDocument();
+    expect(toDoItem0.getAttribute('href')).toBe('/detail/0');
+    const toDoItem1 = screen.getByText(sampleData[1]);
+    expect(toDoItem1).toBeInTheDocument();
+    expect(toDoItem1.getAttribute('href')).toBe('/detail/1');
+    const toDoItem2 = screen.getByText(sampleData[2]);
+    expect(toDoItem2).toBeInTheDocument();
+    expect(toDoItem2.getAttribute('href')).toBe('/detail/2');
+
     expect(screen.getAllByText('Delete').length).toBe(3);
   });
 
@@ -40,10 +51,11 @@ describe('<ToDoList />', () => {
     const sampleData = ['ToDo 1', 'ToDo 2', 'ToDo 3'];
     localStorage.setItem('ToDoList', JSON.stringify(sampleData));
 
-    render(
+    renderWithRouter(
       <ToDoListProvider>
         <ToDoList />
       </ToDoListProvider>,
+      { route: '/' },
     );
 
     /*
@@ -70,5 +82,34 @@ describe('<ToDoList />', () => {
     fireEvent.click(toDoItem.nextElementSibling as HTMLElement);
     expect(toDoItem).not.toBeInTheDocument();
     expect(JSON.parse(localStorage.getItem('ToDoList') as string)).not.toContain(sampleData[0]);
+  });
+
+  it('moves to detail page', () => {
+    const TestComponent = (): JSX.Element => {
+      const { pathname } = useLocation();
+      return <div>{pathname}</div>;
+    };
+
+    const sampleData = ['ToDo 1', 'ToDo 2', 'ToDo 3'];
+    localStorage.setItem('ToDoList', JSON.stringify(sampleData));
+
+    renderWithRouter(
+      <>
+        <TestComponent />
+        <ToDoListProvider>
+          <ToDoList />
+        </ToDoListProvider>
+      </>,
+      { route: '/' },
+    );
+
+    const url = screen.getByText('/');
+    expect(url).toBeInTheDocument();
+
+    const toDoItem1 = screen.getByText(sampleData[0]);
+    expect(toDoItem1.getAttribute('href')).toBe('/detail/0');
+    fireEvent.click(toDoItem1);
+
+    expect(url.textContent).toBe('/detail/0');
   });
 });
