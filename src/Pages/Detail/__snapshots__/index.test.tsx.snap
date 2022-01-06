@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Detail /> renders component correctly 1`] = `
-.c2 {
+.c6 {
   text-align: center;
   background-color: #ff1744;
   padding: 10px 20px;
@@ -9,20 +9,58 @@ exports[`<Detail /> renders component correctly 1`] = `
   cursor: pointer;
 }
 
-.c2:hover {
+.c6:hover {
   background-color: #f01440;
 }
 
-.c2:active {
+.c6:active {
   box-shadow: inset 5px 5px 10px rgba(0,0,0,0.2);
 }
 
-.c3 {
+.c7 {
   color: #fff;
   font-size: 16px;
 }
 
-.c0 {
+.c1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #1e40ff;
+}
+
+.c2 {
+  padding: 20px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.c3 {
+  padding: 20px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  position: absolute;
+  left: 20px;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -40,13 +78,32 @@ exports[`<Detail /> renders component correctly 1`] = `
   flex-direction: column;
 }
 
-.c1 {
+.c5 {
   min-width: 350px;
   height: 350px;
   overflow-y: auto;
   border: 1px solid #bdbdbd;
   margin-bottom: 20px;
   padding: 10px;
+}
+
+.c0 {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flexx;
+  display: -ms-flexxbox;
+  display: flexx;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 <div>
@@ -56,15 +113,34 @@ exports[`<Detail /> renders component correctly 1`] = `
     <div
       class="c1"
     >
-      ToDo 1
+      <div
+        class="c2"
+      >
+        Todo In Detail
+      </div>
+      <a
+        class="c3"
+        href="/"
+      >
+        Go Back...
+      </a>
     </div>
     <div
-      class="c2"
+      class="c4"
     >
       <div
-        class="c3"
+        class="c5"
       >
-        Delete
+        ToDo 1
+      </div>
+      <div
+        class="c6"
+      >
+        <div
+          class="c7"
+        >
+          Delete
+        </div>
       </div>
     </div>
   </div>
